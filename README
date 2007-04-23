@@ -1,0 +1,11 @@
+
+To run vizualization: 
+
+  java -Djava.library.path=:./external/lib: -cp ./external/jogl.jar:./lib/barnes-viz.jar -Dnbody.host=venus.cs.vu.nl -Dnbody.port=9889 viz.Visualization <Model>
+
+where <Model> is one of:
+
+  Simple
+  Plummer
+  Communicating
+  <file>

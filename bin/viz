@@ -1,0 +1,3 @@
+HOSTNAME=$1
+shift
+java -Xmx128M -Xms64M -Djava.library.path=:./external/lib: -cp ./external/jogl.jar:./lib/barnes-viz.jar -Dnbody.host=$HOSTNAME -Dnbody.port=9889 viz.Visualization Communicating $*

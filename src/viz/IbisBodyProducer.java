@@ -66,6 +66,7 @@ public class IbisBodyProducer implements BodyProducer {
 
                 System.err.println("receiving");
                 ReadMessage m = rport.receive();
+                System.err.println("received message!");
                 
                 int numBodies = m.readInt();
                 int iteration = m.readInt();
@@ -81,6 +82,8 @@ public class IbisBodyProducer implements BodyProducer {
                     old[i] = m.readFloat();
                 }
 
+                m.finish();
+                
                 return new BodyList(old, iteration, runTime);
             } catch (Exception e) {
                 viz.resetHistory();

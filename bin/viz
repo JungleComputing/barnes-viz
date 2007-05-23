@@ -1,3 +1,20 @@
 HOSTNAME=$1
 shift
-java -Xmx128M -Xms64M -Djava.library.path=:./external/lib: -cp ./external/jogl.jar:./lib/barnes-viz.jar -Dnbody.host=$HOSTNAME -Dnbody.port=9889 viz.Visualization Communicating $*
+
+# Jar-files from library.
+LIBCLASSPATH=""
+add_to_libclasspath () {
+    JARFILES=`cd "$1" && ls *.jar 2>/dev/null`
+    for i in ${JARFILES} ; do
+        if [ -z "$LIBCLASSPATH" ] ; then
+            LIBCLASSPATH="$1/$i"
+        else
+            LIBCLASSPATH="$LIBCLASSPATH:$1/$i"
+        fi
+    done
+}
+
+# Add the jar files in the Ibis lib dir to the classpath.
+add_to_libclasspath external/ibis
+
+java -Xmx128M -Xms64M -Djava.library.path=:./external/lib: -cp ./external/jogl.jar:./lib/barnes-viz.jar:$LIBCLASSPATH -Dnbody.host=$HOSTNAME -Dnbody.port=9889 viz.Visualization Ibis $*

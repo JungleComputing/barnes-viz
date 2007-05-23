@@ -1,6 +1,7 @@
 package viz;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
@@ -104,6 +105,8 @@ public class Visualization implements GLEventListener, MouseListener,
             producer = new PlummerBodyProducer(numBodies);
         } else if (model.equals("Communicating")) {
             producer = new CommunicatingBodyProducer(this);
+        } else if (model.equals("Ibis")) {
+            producer = new IbisBodyProducer(this);
         } else {
             try {
                 producer = new FromFileProducer(model);
@@ -136,6 +139,8 @@ public class Visualization implements GLEventListener, MouseListener,
         canvas.addKeyListener(this);
         canvas.addMouseWheelListener(this);
 
+        canvas.setBackground(Color.BLACK);
+        
         //        canvas.setSize(256, 256);
         canvas.setVisible(true);
     }

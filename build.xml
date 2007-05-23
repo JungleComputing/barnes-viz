@@ -15,6 +15,9 @@
 		<fileset dir="${external}">
 			<include name="*.jar" />
 		</fileset>
+		<fileset dir="${external}/ibis">
+			<include name="*.jar" />
+		</fileset>
 	</path>
 
 	<target name="init">

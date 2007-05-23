@@ -92,8 +92,8 @@ public class InfoComponent extends JComponent {
         this.v = v;
 
         nf = java.text.NumberFormat.getInstance();
-        nf.setMaximumFractionDigits(3);
-        nf.setMinimumFractionDigits(3);
+        nf.setMaximumFractionDigits(2);
+        nf.setMinimumFractionDigits(2);
         nf.setGroupingUsed(false);
 
         setBackground(Color.BLACK);
@@ -118,6 +118,7 @@ public class InfoComponent extends JComponent {
         
         if (maxSpeed < 1) {
             maxYScale = 1;
+            scaleIncrement = 1;
         } else if (maxSpeed < 100) {
             maxYScale = maxSpeed + (maxSpeed % 5 == 0 ? 0 : (5 - maxSpeed % 5));
             if (maxYScale == 0) maxYScale = 5;
@@ -168,7 +169,7 @@ public class InfoComponent extends JComponent {
         }
 
         // draw title
-        g.setColor(Color.LIGHT_GRAY);
+        g.setColor(Color.WHITE);
         Font old = g.getFont();
         g.setFont(new Font("SansSerif", Font.BOLD, 18));
         g.drawString("Iterations per second", LOAD_GRAPH_X_OFFSET,
@@ -199,6 +200,8 @@ public class InfoComponent extends JComponent {
         String speedString = nf.format(speed);
 
         if (snapshot != null) {
+            Font old = g.getFont();
+            g.setFont(new Font("SansSerif", Font.BOLD, 18));
             g
                 .drawString("Simulating " + snapshot.getBodyCount() + " stars",
                     LOAD_GRAPH_X_OFFSET, 50 + LOAD_GRAPH_Y_OFFSET
@@ -206,13 +209,14 @@ public class InfoComponent extends JComponent {
 
             g
                 .drawString("iteration: " + snapshot.getIteration(),
-                    LOAD_GRAPH_X_OFFSET, 70 + LOAD_GRAPH_Y_OFFSET
+                    LOAD_GRAPH_X_OFFSET, 90 + LOAD_GRAPH_Y_OFFSET
                         + LOAD_GRAPH_SIZE);
 
             g
-                .drawString(speedString + " iterations per second",
-                    LOAD_GRAPH_X_OFFSET, 90 + LOAD_GRAPH_Y_OFFSET
+                .drawString(speedString + " iterations / s",
+                    LOAD_GRAPH_X_OFFSET, 130 + LOAD_GRAPH_Y_OFFSET
                         + LOAD_GRAPH_SIZE);
+            g.setFont(old);
         }
 
         drawLoadGraph(g);

@@ -486,11 +486,6 @@ public class Visualization implements GLEventListener, MouseListener,
 
         JFrame frame = new JFrame("Galaxy Simulation");
 
-        if (args.length == 0) {
-            System.err.println("specify at least a model");
-            System.exit(1);
-        }
-
         int w = -1, h = -1, x = -1, y = -1;
         boolean rotate = false;
 

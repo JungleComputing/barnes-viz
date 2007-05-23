@@ -115,7 +115,10 @@ public class InfoComponent extends JComponent {
         double maxYScale;
         double maxSpeed = speedInfo.maxSpeedInSeries(begin);
         int scaleIncrement = 5;
-        if (maxSpeed < 100) {
+        
+        if (maxSpeed < 1) {
+            maxYScale = 1;
+        } else if (maxSpeed < 100) {
             maxYScale = maxSpeed + (maxSpeed % 5 == 0 ? 0 : (5 - maxSpeed % 5));
             if (maxYScale == 0) maxYScale = 5;
         } else {

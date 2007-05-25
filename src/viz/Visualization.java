@@ -33,7 +33,7 @@ public class Visualization implements GLEventListener, MouseListener,
 
     private static final boolean VERBOSE_MOUSE = false;
 
-    private static final boolean SHOW_TAILS = true;
+    private static final boolean SHOW_TAILS = false;
 
     private static boolean SHOW_LOAD_GRAPH = true;
 
@@ -181,15 +181,19 @@ public class Visualization implements GLEventListener, MouseListener,
         } catch (Exception e) {
             System.err.println("Failed to load texture " + e);
         }
+        if (texture != null) {
+            texture.bind();
+            if(!SHOW_TAILS) {
+                texture.enable();
+            }
+        }
     }
 
     private void drawBodies(GL gl) {
 
         float quadratic[] = { 0.0f, 0.0f, 0.01f };
 
-        gl
-                .glPointParameterfvARB(GL.GL_POINT_DISTANCE_ATTENUATION,
-                        quadratic, 0);
+        gl.glPointParameterfvARB(GL.GL_POINT_DISTANCE_ATTENUATION, quadratic, 0);
         gl.glPointParameterfARB(GL.GL_POINT_SIZE_MAX_ARB, particleSizeMax);
         gl.glPointParameterfARB(GL.GL_POINT_SIZE_MIN_ARB, particleSizeMin);
 
@@ -221,8 +225,7 @@ public class Visualization implements GLEventListener, MouseListener,
             return;
         }
 
-        if (texture != null) {
-            texture.bind();
+        if (texture != null && SHOW_TAILS) {
             texture.enable();
         }
 
@@ -243,7 +246,7 @@ public class Visualization implements GLEventListener, MouseListener,
 
         gl.glDisable(GL.GL_POINT_SPRITE_ARB);
 
-        if (texture != null) {
+        if (texture != null && SHOW_TAILS) {
             texture.disable();
         }
 

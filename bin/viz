@@ -17,4 +17,4 @@ add_to_libclasspath () {
 # Add the jar files in the Ibis lib dir to the classpath.
 add_to_libclasspath external/ibis
 
-java -Xmx128M -Xms64M -Djava.library.path=:./external/lib: -cp ./external/jogl.jar:./lib/barnes-viz.jar:$LIBCLASSPATH -Dnbody.host=$HOSTNAME -Dnbody.port=9889 viz.Visualization Ibis $*
+java -Xmx128M -Xms64M -Djava.library.path=:./external/lib: -cp ./external/jogl.jar:./external/gluegen-rt.jar:./lib/barnes-viz.jar:$LIBCLASSPATH -Dnbody.host=$HOSTNAME viz.Visualization Ibis $*

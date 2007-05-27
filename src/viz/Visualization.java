@@ -33,7 +33,7 @@ public class Visualization implements GLEventListener, MouseListener,
 
     private static final boolean VERBOSE_MOUSE = false;
 
-    private static final boolean SHOW_TAILS = false;
+    private static final boolean SHOW_TAILS = true;
 
     private static boolean SHOW_LOAD_GRAPH = true;
 

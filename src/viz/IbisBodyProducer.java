@@ -19,6 +19,7 @@ public class IbisBodyProducer implements BodyProducer {
     private ReceivePort rport;
     private Ibis ibis;
 
+    private boolean exit = false;
     
     IbisBodyProducer(Visualization viz) {
         this.viz = viz;
@@ -67,6 +68,7 @@ public class IbisBodyProducer implements BodyProducer {
             } catch (Exception e) {
                 // ignore
             }
+            connected = false;
         }
     }
 
@@ -95,12 +97,14 @@ public class IbisBodyProducer implements BodyProducer {
                 
                 return new BodyList(old, iteration, runTime);
             } catch (Exception e) {
-                viz.resetHistory();
-                System.err.println("Lost connection while receiving,"
-                    + " reconnecting");
-                close();
-                connected = false;
-                init();
+                if(!exit) {
+                    viz.resetHistory();
+                    close();
+                    connected = false;
+                    System.err.println("Lost connection while receiving,"
+                            + " reconnecting");
+                    init();
+                }
             }
 
         } while (true);
@@ -112,5 +116,10 @@ public class IbisBodyProducer implements BodyProducer {
 
     public boolean fixedExtreme() {
         return false;
+    }
+    
+    public void end() {
+        exit = true;
+        close();
     }
 }

@@ -5,4 +5,5 @@ public interface BodyProducer {
     
     boolean fixedExtreme();
     float getMostExtreme();    
+    void end();
 }

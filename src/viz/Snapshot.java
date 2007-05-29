@@ -76,8 +76,8 @@ public class Snapshot {
         mostMax = Math.max(Math.max(maxX, maxY), maxZ);
         mostMin = Math.min(Math.min(minX, minY), minZ);
 
-        System.out.println("Most max = " + mostMax);
-        System.out.println("Most min = " + mostMin);
+//        System.out.println("Most max = " + mostMax);
+//        System.out.println("Most min = " + mostMin);
 
         mostExtreme = Math.max(Math.abs(mostMax), Math.abs(mostMin));
 
@@ -85,7 +85,7 @@ public class Snapshot {
         centerY = minY + ((maxY - minY) / 2);
         centerZ = minZ + ((maxZ - minZ) / 2);
 
-        System.out.println("Most extreme = " + mostExtreme);
+//        System.out.println("Most extreme = " + mostExtreme);
     }
 
     int getBodyCount() {

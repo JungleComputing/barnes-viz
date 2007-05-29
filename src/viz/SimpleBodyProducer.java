@@ -92,5 +92,9 @@ public class SimpleBodyProducer implements BodyProducer {
 
     public boolean fixedExtreme() {       
         return true;
-    }    
+    }
+    public void end() {
+        // do nothing
+    }
+
 }

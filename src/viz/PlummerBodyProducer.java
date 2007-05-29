@@ -48,5 +48,9 @@ public class PlummerBodyProducer implements BodyProducer {
 
     public boolean fixedExtreme() {
         return false;
-    }       
+    }
+    public void end() {
+        // do nothing
+    }
+
 }

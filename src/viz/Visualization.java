@@ -570,6 +570,7 @@ public class Visualization implements GLEventListener, MouseListener,
 
     public void keyTyped(KeyEvent e) {
         if (e.getKeyChar() == 'q') {
+            producer.end();
             System.exit(0);
         }
 

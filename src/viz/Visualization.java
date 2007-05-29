@@ -263,10 +263,9 @@ public class Visualization implements GLEventListener, MouseListener,
 
                 while (index < max && snapshot.history[index] != null) {
                     float alpha = (float) (max - index) / (float) max;
-                    gl
-                            .glColor4f(colors[i], colors[i + 1], colors[i + 2],
+                    gl.glColor4f(colors[i], colors[i + 1], colors[i + 2],
                                     alpha);
-                    //                    gl.glColor4f(1.0f, 1.0f, 1.0f, alpha);
+//                    gl.glColor4f(1.0f, 1.0f, 1.0f, alpha);
                     gl.glVertex3fv(snapshot.history[index].getBodies(), i);
                     index++;
                 }

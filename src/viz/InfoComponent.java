@@ -114,14 +114,16 @@ public class InfoComponent extends JComponent {
         long begin = time - LOAD_MEMORY;
         double maxYScale;
         double maxSpeed = speedInfo.maxSpeedInSeries(begin);
-        int scaleIncrement = 5;
+        int scaleIncrement;
         
-        if (maxSpeed < 1) {
-            maxYScale = 1;
+        if (maxSpeed < 5) {
+            maxYScale = maxSpeed + (maxSpeed % 1 == 0 ? 0 : (1 - maxSpeed % 1));
+            if (maxYScale == 0) maxYScale = 1;
             scaleIncrement = 1;
         } else if (maxSpeed < 100) {
             maxYScale = maxSpeed + (maxSpeed % 5 == 0 ? 0 : (5 - maxSpeed % 5));
             if (maxYScale == 0) maxYScale = 5;
+            scaleIncrement = 5;
         } else {
             maxYScale = maxSpeed
                 + (maxSpeed % 100 == 0 ? 0 : (100 - maxSpeed % 100));

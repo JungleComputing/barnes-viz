@@ -69,7 +69,8 @@ public class BodyHistory extends Thread {
     }
     
     public synchronized Snapshot getSnapShot() {
-        
+        if(available == 0) return null;
+/*
         while (available == 0) { 
             try { 
                 wait();
@@ -77,7 +78,7 @@ public class BodyHistory extends Thread {
                 // TODO: handle exception
             } 
         }
-
+*/
         int targetIndex = 0;
         
         for (int i=0;i<available;i++) {

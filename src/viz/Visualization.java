@@ -208,6 +208,7 @@ public class Visualization implements GLEventListener, MouseListener,
         gl.glBlendFunc(GL.GL_SRC_ALPHA, GL.GL_ONE);
 
         snapshot = history.getSnapShot();
+        if(snapshot == null) return;
 
         if (first) {
 

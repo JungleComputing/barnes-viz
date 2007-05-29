@@ -12,16 +12,14 @@ import java.util.Properties;
 
 public class IbisBodyProducer implements BodyProducer {
 
-    private String targetHost;
-
-    private int targetPort;
-
     private boolean connected = false;
 
     private Visualization viz;
 
     private ReceivePort rport;
+    private Ibis ibis;
 
+    
     IbisBodyProducer(Visualization viz) {
         this.viz = viz;
         init();
@@ -41,13 +39,14 @@ public class IbisBodyProducer implements BodyProducer {
             p.setProperty("ibis.pool.name", "barnes-viz");
             p.setProperty("ibis.server.address", System.getProperty("nbody.host"));
             
-            Ibis ibis = IbisFactory.createIbis(s, p, true, null, t);
+            ibis = IbisFactory.createIbis(s, p, true, null, t);
 
             Registry registry = ibis.registry();
             registry.elect("barnesViz");
 
             rport = ibis.createReceivePort(t, "barnes-viz-port");
             rport.enableConnections();
+            connected = true;
         } catch (Exception e) {
             System.err.println("failed to init ibis: " + e);
             e.printStackTrace();
@@ -56,6 +55,19 @@ public class IbisBodyProducer implements BodyProducer {
     }
 
     private void close() {
+        if(connected) {
+            try {
+                if(rport != null) rport.close(1000);
+            } catch (Exception e) {
+                // ignore
+            }
+
+            try {
+                if(ibis != null) ibis.end();
+            } catch (Exception e) {
+                // ignore
+            }
+        }
     }
 
     public BodyList getBodies(float[] old) {
@@ -63,10 +75,7 @@ public class IbisBodyProducer implements BodyProducer {
 
         do {
             try {
-
-                System.err.println("receiving");
                 ReadMessage m = rport.receive();
-                System.err.println("received message!");
                 
                 int numBodies = m.readInt();
                 int iteration = m.readInt();

@@ -177,7 +177,7 @@ public class Visualization implements GLEventListener, MouseListener,
         // Load the texture for the bodies...
         try {
             texture = TextureIO.newTexture(new File("particle.png"), true);
-            System.out.println("Texture loaded!!");
+//            System.out.println("Texture loaded!!");
         } catch (Exception e) {
             System.err.println("Failed to load texture " + e);
         }
@@ -211,7 +211,7 @@ public class Visualization implements GLEventListener, MouseListener,
 
         if (first) {
 
-            System.out.println("Getting extremes");
+//            System.out.println("Getting extremes");
 
             snapshot.determineExtremes();
 

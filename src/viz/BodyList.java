@@ -7,7 +7,6 @@ import java.util.Random;
 
 public class BodyList {
     
-//    private static int[] translation;
     private static int[] translation;
     private static boolean inited;
     
@@ -29,23 +28,6 @@ public class BodyList {
         for(int i=0; i<bodies.length; i++) {
             this.bodies[i] = bodies[translation[i]];
         }
-        
-        /*
-        int begin = 0;
-        int end = bodies.length-1;
-        int dest = 0;
-        
-        while(begin < end) {
-            this.bodies[dest+0] = bodies[begin++]; // x
-            this.bodies[dest+1] = bodies[begin++]; // y
-            this.bodies[dest+2] = bodies[begin++]; // z
-            
-            this.bodies[dest+5] = bodies[end--]; // x 
-            this.bodies[dest+4] = bodies[end--]; // y
-            this.bodies[dest+3] = bodies[end--]; // z
-            dest += 6;
-        }
-        */
     }
     
     float[] getBodies() {
@@ -83,12 +65,12 @@ public class BodyList {
             tmpTranslation[index1] = tmpTranslation[index2];
             tmpTranslation[index2] = tmp;
         }
-        
+      
         translation = new int[size];
         for(int i=0; i<nbodies; i++) {
-            translation[i*3+0] = tmpTranslation[i] + 0;
-            translation[i*3+1] = tmpTranslation[i] + 1;
-            translation[i*3+2] = tmpTranslation[i] + 2;
+            translation[i*3+0] = tmpTranslation[i]*3 + 0;
+            translation[i*3+1] = tmpTranslation[i]*3 + 1;
+            translation[i*3+2] = tmpTranslation[i]*3 + 2;
         }
         
         inited = true;

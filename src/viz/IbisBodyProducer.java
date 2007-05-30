@@ -101,8 +101,10 @@ public class IbisBodyProducer implements BodyProducer {
                     viz.resetHistory();
                     close();
                     connected = false;
-                    System.err.println("Lost connection while receiving,"
-                            + " reconnecting");
+                    System.err.println("Lost connection while receiving: " + e);
+                    e.printStackTrace();
+                    System.err.println("reconnecting");
+
                     init();
                 }
             }

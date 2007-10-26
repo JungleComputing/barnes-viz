@@ -29,7 +29,7 @@ public class IbisBodyProducer implements BodyProducer {
     private void init() {
         try {
             IbisCapabilities s = new IbisCapabilities(
-                IbisCapabilities.ELECTIONS);
+                IbisCapabilities.ELECTIONS_STRICT);
             PortType t = new PortType(PortType.SERIALIZATION_OBJECT,
                 PortType.COMMUNICATION_RELIABLE,
                 PortType.CONNECTION_ONE_TO_ONE,

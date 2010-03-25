@@ -30,15 +30,19 @@ public class IbisBodyProducer implements BodyProducer {
         try {
             IbisCapabilities s = new IbisCapabilities(
                 IbisCapabilities.ELECTIONS_STRICT);
-            PortType t = new PortType(PortType.SERIALIZATION_OBJECT,
+            PortType t = new PortType(PortType.SERIALIZATION_DATA,
                 PortType.COMMUNICATION_RELIABLE,
                 PortType.CONNECTION_ONE_TO_ONE,
                 PortType.RECEIVE_EXPLICIT);
 
             Properties p = new Properties();
-            p.setProperty("ibis.serialization", "ibis");
+            // p.setProperty("ibis.serialization", "ibis");
             p.setProperty("ibis.pool.name", "barnes-viz");
-            p.setProperty("ibis.server.address", System.getProperty("nbody.host"));
+
+            String nbodyHost = System.getProperty("nbody.host");
+            if (nbodyHost != null) {
+                p.setProperty("ibis.server.address", nbodyHost);
+            }
             
             ibis = IbisFactory.createIbis(s, p, true, null, t);
 
@@ -88,10 +92,7 @@ public class IbisBodyProducer implements BodyProducer {
                 if (old == null || old.length != numBodies) {
                     old = new float[3 * numBodies];
                 }
-
-                for (int i = 0; i < 3 * numBodies; i++) {
-                    old[i] = m.readFloat();
-                }
+                m.readArray(old);
 
                 m.finish();
                 

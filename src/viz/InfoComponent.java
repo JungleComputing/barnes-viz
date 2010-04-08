@@ -173,7 +173,7 @@ public class InfoComponent extends JComponent {
         // draw title
         g.setColor(Color.WHITE);
         Font old = g.getFont();
-        g.setFont(new Font("SansSerif", Font.BOLD, 18));
+        g.setFont(new Font("SansSerif", Font.BOLD, 16));
         g.drawString("Iterations per second", LOAD_GRAPH_X_OFFSET,
             LOAD_GRAPH_Y_OFFSET - 30);
         g.setFont(old);
@@ -203,7 +203,7 @@ public class InfoComponent extends JComponent {
 
         if (snapshot != null) {
             Font old = g.getFont();
-            g.setFont(new Font("SansSerif", Font.BOLD, 18));
+            g.setFont(new Font("SansSerif", Font.BOLD, 16));
             g
                 .drawString("Simulating " + snapshot.getBodyCount() + " stars",
                     LOAD_GRAPH_X_OFFSET, 50 + LOAD_GRAPH_Y_OFFSET
